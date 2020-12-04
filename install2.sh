@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Is system UEFI?"
 read uefi
 timedatectl list-timezones
