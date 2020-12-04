@@ -46,4 +46,5 @@ mount $disk1 /mnt
 pacstrap /mnt base linux linux-firmware linux-headers linux-zen linux-zen-headers vim nano git --noconfirm
 genfstab -U /mnt >> /mnt/etc/fstab
 git clone https://github.com/zaevan01/linuxFiles.git
+cd
 arch-chroot /mnt
