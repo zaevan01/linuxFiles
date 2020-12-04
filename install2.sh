@@ -55,11 +55,12 @@ systemctl enable sddm.service
 systemctl enable NetworkManager.service
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
-su
+su $uName
+cd
 git clone https://aur.archlinux.org/trizen.git
 cd trizen
 makepkg -si
-cd ..
+cd
 git clone https://github.com/zaevan01/linuxFiles.git
 mv /etc/pacman.conf /etc/pacman.conf.bak
 cp ~/linuxFiles/pacman.conf /etc/pacman.conf
