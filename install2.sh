@@ -61,11 +61,25 @@ git clone https://aur.archlinux.org/trizen.git
 cd trizen
 makepkg -si
 cd
-git clone https://github.com/zaevan01/linuxFiles.git
 mv /etc/pacman.conf /etc/pacman.conf.bak
-cp ~/linuxFiles/pacman.conf /etc/pacman.conf
+cp /linuxFiles/pacman.conf /etc/pacman.conf
 mv ~/.bashrc ~/.bashrc.bak
-cp ~/linuxFiles/.bashrc ~/.bashrc
-trizen -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
-mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
-cp ~/linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
+cp /linuxFiles/.bashrc ~/.bashrc
+echo "Install nvidia drivers and AMD Microcode?(Y/n)"
+read extraPrograms
+case $extraPrograms in
+	y)
+		trizen -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
+		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
+		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
+
+		;;
+	n)
+		exit
+		;;
+	*)
+		trizen -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
+		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
+		cp ~/linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
+		;;
+esac
