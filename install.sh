@@ -1,3 +1,4 @@
+#!/bin/bash
 ls /sys/firmware/efi/efivars
 echo "Is system UEFI?"
 read uefi
