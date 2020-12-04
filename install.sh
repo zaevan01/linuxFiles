@@ -5,7 +5,6 @@ read uefi
 fdisk -l
 echo "Please select a boot device:"
 read bootDev
-parted -s $bootDev -- mklabel gpt
 #create filesystem
 case $uefi in
 	y)
@@ -14,20 +13,16 @@ case $uefi in
 		read disk2
 		echo "Root?"
 		read disk1
-		parted -s $bootDev mkpart primary fat32 2048s 512MB
-		parted -s $bootDev mkpart primary ext4 512MB -1s
+		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB -1s
 		mkfs.fat -F 32 $disk2
 		mkfs.ext4 $disk1
-		parted set 1 bios_grub on
-		parted set 2 root on
 		;;
 	n)
 		#for non-uefi
 		echo "Root?"
 		read disk1
-		parted -s $bootDev mkpart primary ext4 2048s -1s
+		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s -1s
 		mkfs.ext4 $disk1
-		parted set 1 root on
 		;;
 	*)
 		#for uefi systems
@@ -35,12 +30,9 @@ case $uefi in
 		read disk2
 		echo "Root?"
 		read disk1
-		parted -s $bootDev mkpart primary fat32 2048s 512MB
-		parted -s $bootDev mkpart primary ext4 512MB -1s
+		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB -1s
 		mkfs.fat -F 32 $disk2
 		mkfs.ext4 $disk1
-		parted set 1 bios_grub on
-		parted set 2 root on
 		;;
 esac
 echo "please enter wifi-SSID"
