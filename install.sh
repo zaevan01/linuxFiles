@@ -13,7 +13,7 @@ case $uefi in
 		read disk2
 		echo "Root?"
 		read disk1
-		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB -1s
+		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB 100%
 		mkfs.fat -F 32 $disk2
 		mkfs.ext4 $disk1
 		;;
@@ -21,7 +21,7 @@ case $uefi in
 		#for non-uefi
 		echo "Root?"
 		read disk1
-		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s -1s
+		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 100%
 		mkfs.ext4 $disk1
 		;;
 	*)
@@ -30,7 +30,7 @@ case $uefi in
 		read disk2
 		echo "Root?"
 		read disk1
-		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB -1s
+		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB 100%
 		mkfs.fat -F 32 $disk2
 		mkfs.ext4 $disk1
 		;;
