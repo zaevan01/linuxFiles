@@ -55,21 +55,17 @@ systemctl enable sddm.service
 systemctl enable NetworkManager.service
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
-su $uName
-cd
+cd /home/$uName
 git clone https://aur.archlinux.org/trizen.git
-cd trizen
-makepkg -si
-cd
 mv /etc/pacman.conf /etc/pacman.conf.bak
 cp /linuxFiles/pacman.conf /etc/pacman.conf
-mv ~/.bashrc ~/.bashrc.bak
-cp /linuxFiles/.bashrc ~/.bashrc
+mv /home/$uName/.bashrc /home/$uName/.bashrc.bak
+cp /linuxFiles/.bashrc /home/$uName/.bashrc
 echo "Install nvidia drivers and AMD Microcode?(Y/n)"
 read extraPrograms
 case $extraPrograms in
 	y)
-		trizen -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
+		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
 		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
 		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
 
@@ -78,7 +74,7 @@ case $extraPrograms in
 		exit
 		;;
 	*)
-		trizen -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
+		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
 		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
 		cp ~/linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
 		;;
