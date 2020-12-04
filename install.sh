@@ -42,6 +42,7 @@ read wifiPass
 #(connect to wifi)
 iwctl --passphrase $wifiPass station wlan0 connect $wifiName
 pacman -Syy
+pacman -S git --noconfirm
 mount $disk1 /mnt
 pacstrap /mnt base linux linux-firmware linux-headers linux-zen linux-zen-headers vim nano git --noconfirm
 genfstab -U /mnt >> /mnt/etc/fstab
