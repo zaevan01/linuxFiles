@@ -117,3 +117,4 @@ case $extraPrograms in
 		cp ~/linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
 		;;
 esac
+exit
