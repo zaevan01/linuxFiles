@@ -1,4 +1,7 @@
 #!/bin/bash 
+#
+#Note for connecting to wifi: iwctl --passphrase {WIFIPASSWORD} station {DEVICE(usually wlan0)} connect "{SSID}"
+#
 ls /sys/firmware/efi/efivars
 echo "Is system UEFI? (Y/n)"
 read uefi
@@ -35,12 +38,6 @@ case $uefi in
 		mkfs.ext4 $disk1
 		;;
 esac
-echo "please enter wifi-SSID"
-read wifiName
-echo "Please enter wifi-password"
-read wifiPass
-#(connect to wifi)
-iwctl --passphrase $wifiPass station wlan0 connect $wifiName
 pacman -Syy
 pacman -S git --noconfirm
 mount $disk1 /mnt
