@@ -51,8 +51,44 @@ passwd $uName
 pacman -S sudo --noconfirm
 export EDITOR=nano
 echo $uName' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-pacman -S xorg plasma plasma-wayland-session kde-applications terminator base-devel reflector firefox --noconfirm
-systemctl enable sddm.service
+pacman -S xorg terminator base-devel reflector firefox --noconfirm
+echo "Please select a desktop environment:"
+echo -e "KDE (Plasma)\nGnome (3)\nXFCE\nCinnamon\nMate\n"
+echo "Please enter your selection:"
+DEinstall=false
+while [ "$DEinstall" = false ]
+do
+read DE
+case %DE in
+	KDE|kde|"KDE Plasma"|"kde plasma"|k|K)
+		pacman -S plasma plasma-wayland-session kde-applications --noconfirm
+		systemctl enable sddm.service
+		DEinstall=true
+		;;
+	Gnome|gnome|"Gnome 3"|"gnome 3"|g|G)
+		pacman -S gnome --noconfirm
+		DEinstall=true
+		;;
+	XFCE|xfce|x|X)
+		pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm
+		systemctl enable lightdm.service
+		DEinstall=true
+		;;
+	Cinnamon|cinnamon|c|C)
+		pacman -S cinnamon lightdm lightdm-gtk-greeter --noconfirm
+		systemctl enable lightdm.service
+		DEinstall=true
+		;;
+	Mate|mate|m|M)
+		pacman -S mate mate-extra lightdm lightdm-gtk-greeter --noconfirm
+		systemctl enable lightdm.service
+		DEinstall=true
+		;;
+	*)
+		echo "Please choose a valid option:"
+		;;
+esac
+done
 systemctl enable NetworkManager.service
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
