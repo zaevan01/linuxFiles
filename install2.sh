@@ -17,7 +17,7 @@ echo '::1 localhost' >> /etc/hosts
 echo '127.0.1.1 '$hName >> /etc/hosts
 passwd
 case $uefi in
-	y)
+	y|*)
 		#for uefi systems
 		pacman -S grub efibootmgr --noconfirm
 		mkdir /boot/efi
@@ -31,16 +31,6 @@ case $uefi in
 		#for non-uefi
 		pacman -S grub --noconfirm
 		grub-install /mnt
-		grub-mkconfig -o /boot/grub/grub.cfg
-		;;
-	*)
-		#for uefi systems
-		pacman -S grub efibootmgr --noconfirm
-		mkdir /boot/efi
-		echo "Boot partition?"
-		read disk2
-		mount $disk2 /boot/efi
-		grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 		grub-mkconfig -o /boot/grub/grub.cfg
 		;;
 esac
@@ -102,19 +92,14 @@ cp /linuxFiles/.bashrc /home/$uName/.bashrc
 echo "Install nvidia drivers and AMD Microcode?(Y/n)"
 read extraPrograms
 case $extraPrograms in
-	y)
+	y|*)
 		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
 		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
 		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
 
 		;;
 	n)
-		exit
-		;;
-	*)
-		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
-		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
-		cp ~/linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
+		echo
 		;;
 esac
 exit
