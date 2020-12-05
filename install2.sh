@@ -55,35 +55,35 @@ pacman -S xorg terminator base-devel reflector firefox --noconfirm
 echo "Please select a desktop environment:"
 echo -e "KDE (Plasma)\nGnome (3)\nXFCE\nCinnamon\nMate\n"
 echo "Please enter your selection:"
-DEinstall=false
-while [ "$DEinstall" = false ]
+dei=false
+while [ "$dei" = false ]
 do
-read DE
-case %DE in
+read de
+case %de in
 	k)
 		pacman -S plasma plasma-wayland-session kde-applications --noconfirm
 		systemctl enable sddm.service
-		DEinstall=true
+		dei=true
 		;;
 	g)
 		pacman -S gnome --noconfirm
 		systemctl enable gdm.service
-		DEinstall=true
+		dei=true
 		;;
 	x)
 		pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
-		DEinstall=true
+		dei=true
 		;;
 	c)
 		pacman -S cinnamon lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
-		DEinstall=true
+		dei=true
 		;;
 	m)
 		pacman -S mate mate-extra lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
-		DEinstall=true
+		dei=true
 		;;
 	*)
 		echo "Please choose a valid option:"
