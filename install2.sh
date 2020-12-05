@@ -60,27 +60,27 @@ while [ "$DEinstall" = false ]
 do
 read DE
 case %DE in
-	KDE|kde|"KDE Plasma"|"kde plasma"|k|K)
+	k)
 		pacman -S plasma plasma-wayland-session kde-applications --noconfirm
 		systemctl enable sddm.service
 		DEinstall=true
 		;;
-	Gnome|gnome|"Gnome 3"|"gnome 3"|g|G)
+	g)
 		pacman -S gnome --noconfirm
 		systemctl enable gdm.service
 		DEinstall=true
 		;;
-	XFCE|xfce|x|X)
+	x)
 		pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
 		DEinstall=true
 		;;
-	Cinnamon|cinnamon|c|C)
+	c)
 		pacman -S cinnamon lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
 		DEinstall=true
 		;;
-	Mate|mate|m|M)
+	m)
 		pacman -S mate mate-extra lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
 		DEinstall=true
