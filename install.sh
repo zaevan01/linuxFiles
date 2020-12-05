@@ -47,4 +47,4 @@ cd /mnt/
 git clone https://github.com/zaevan01/linuxFiles.git
 cd
 arch-chroot /mnt
-shutdown now
+#shutdown now
