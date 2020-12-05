@@ -59,28 +59,28 @@ dei=false
 while [ "$dei" = false ]
 do
 read de
-case %de in
-	k)
+case $de in
+	[kK]|[kK][dD][eE])
 		pacman -S plasma plasma-wayland-session kde-applications --noconfirm
 		systemctl enable sddm.service
 		dei=true
 		;;
-	g)
+	[gG]|[gG][nN][oO][mM][eE])
 		pacman -S gnome --noconfirm
 		systemctl enable gdm.service
 		dei=true
 		;;
-	x)
+	[xX]|[xX][fF][cC][eE])
 		pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
 		dei=true
 		;;
-	c)
+	[cC]|[cC][iI][nN][nN][aA][mM][oO][nN])
 		pacman -S cinnamon lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
 		dei=true
 		;;
-	m)
+	[mM]|[mM][aA][tT][eE])
 		pacman -S mate mate-extra lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
 		dei=true
