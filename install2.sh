@@ -67,6 +67,7 @@ case %DE in
 		;;
 	Gnome|gnome|"Gnome 3"|"gnome 3"|g|G)
 		pacman -S gnome --noconfirm
+		systemctl enable gdm.service
 		DEinstall=true
 		;;
 	XFCE|xfce|x|X)
