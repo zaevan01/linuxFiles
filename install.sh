@@ -18,7 +18,7 @@ case $uefi in
 		root=$bootDev"2"
 		mkfs.fat -F 32 $boot
 		mkfs.ext4 $root
-		mount $bootDev"2" /mnt
+		mount $root /mnt
 		;;
 	n)
 		#for non-uefi
