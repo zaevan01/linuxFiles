@@ -14,15 +14,18 @@ case $uefi in
 	y|*)
 		#for uefi systems
 		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB 100%
-		mkfs.fat -F 32 $bootDev"1"
-		mkfs.ext4 $bootDev"2"
+		boot=$bootDev"1"
+		root=$bootDev"2"
+		mkfs.fat -F 32 $boot
+		mkfs.ext4 $root
 		mount $bootDev"2" /mnt
 		;;
 	n)
 		#for non-uefi
 		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 100%
-		mkfs.ext4 $bootDev"1"
-		mount $bootDev"1" /mnt
+		root=$bootDev"1"
+		mkfs.ext4 $root
+		mount $root /mnt
 		;;
 esac
 pacman -Syy
