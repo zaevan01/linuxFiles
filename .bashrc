@@ -8,10 +8,10 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-alias off="sudo shutdown now"
-alias roff="sudo reboot now"
+alias off="sudo systemctl poweroff"
+alias roff="sudo systemctl reboot"
 alias backup="sudo timeshift --create"
-alias sleep="sudo pm-suspend"
+alias sleep="sudo systemctl suspend"
 alias wisdom="fortune | cowsay -f tux | lolcat"
 alias e="exit"
 alias c="clear"
