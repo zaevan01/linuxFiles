@@ -93,7 +93,7 @@ echo "Install nvidia drivers and AMD Microcode?(Y/n)"
 read extraPrograms
 case $extraPrograms in
 	y|*)
-		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft
+		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft-launcher
 		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
 		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
 
