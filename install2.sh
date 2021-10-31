@@ -107,7 +107,7 @@ case $gDrivers in
 		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils --noconfirm
 		;;
 	[aA]|[aA][mM][dD])
-		pacman -S mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon xf86-video-amdgpu mesa-vdpau --noconfirm
+		pacman -S mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon xf86-video-amdgpu mesa-vdpau flameshot --noconfirm
 		;;
 	[iI]|[iI][nN][tT][eE][lL])
 		pacman -S mesa lib32-mesa intel-media-driver vulkan-intel --noconfirm
