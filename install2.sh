@@ -89,28 +89,56 @@ mv /etc/pacman.conf /etc/pacman.conf.bak
 cp /linuxFiles/pacman.conf /etc/pacman.conf
 mv /home/$uName/.bashrc /home/$uName/.bashrc.bak
 cp /linuxFiles/.bashrc /home/$uName/.bashrc
-echo "Install nvidia drivers and AMD Microcode?(Y/n)"
+echo "Install Steam and additional software?(Y/n)"
 read extraPrograms
 case $extraPrograms in
 	y|*)
-		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils steam minecraft-launcher --noconfirm
-		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
-		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
-
+		pacman -S steam minecraft-launcher lutris dxvk --noconfirm
 		;;
 	n)
+		echo
+		;;
+esac
+echo "Please Select Appropriate Graphics Drivers"
+echo "Nvidia\nAmd\nIntel"
+read gDrivers
+case $gDrivers in
+	[nN]|[nN][vV][iI][dD][iI][aA])
+		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils --noconfirm
+		;;
+	[aA]|[aA][mM][dD])
+		pacman -S mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon xf86-video-amdgpu mesa-vdpau --noconfirm
+		;;
+	[iI]|[iI][nN][tT][eE][lL])
+		pacman -S mesa lib32-mesa intel-media-driver vulkan-intel --noconfirm
+		;;
+	*)
+	echo
+	;;
+esac
+echo "Is this Zac's Standard Desktop Setup?(y/N)"
+read xFile
+case $xFile in
+	[yY])
+		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
+		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
+		;;
+	[nN]|*)
 		echo
 		;;
 esac
 echo "Install AMD or Intel uCode?\nAMD\nIntel" 
 read uCode
 case $uCode in
-[aA]|[aA][mM][dD]) 
-pacman -S amd-ucode --noconfirm
-[iI]|[iI][nN][tT][EE][lL])
-pacman -S intel-ucode --noconfirm
-*)
-echo
+	[aA]|[aA][mM][dD]) 
+		pacman -S amd-ucode --noconfirm
+		;;
+	[iI]|[iI][nN][tT][EE][lL])
+		pacman -S intel-ucode --noconfirm
+		;;
+	*)
+		echo
+		;;
 esac
 update-grub
 exit
