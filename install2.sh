@@ -19,7 +19,7 @@ passwd
 case $uefi in
 	y|*)
 		#for uefi systems
-		pacman -S grub efibootmgr --noconfirm
+		pacman -S grub efibootmgr update-grub --noconfirm
 		mkdir /boot/efi
 		echo "Boot partition?"
 		read disk2
@@ -29,7 +29,7 @@ case $uefi in
 		;;
 	n)
 		#for non-uefi
-		pacman -S grub --noconfirm
+		pacman -S grub update-grub --noconfirm
 		grub-install /mnt
 		grub-mkconfig -o /boot/grub/grub.cfg
 		;;
@@ -93,7 +93,7 @@ echo "Install nvidia drivers and AMD Microcode?(Y/n)"
 read extraPrograms
 case $extraPrograms in
 	y|*)
-		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils amd-ucode steam minecraft-launcher
+		pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils steam minecraft-launcher --noconfirm
 		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
 		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
 
@@ -102,4 +102,15 @@ case $extraPrograms in
 		echo
 		;;
 esac
+echo "Install AMD or Intel uCode?\nAMD\nIntel" 
+read uCode
+case $uCode in
+[aA]|[aA][mM][dD]) 
+pacman -S amd-ucode --noconfirm
+[iI]|[iI][nN][tT][EE][lL])
+pacman -S intel-ucode --noconfirm
+*)
+echo
+esac
+update-grub
 exit
