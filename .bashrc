@@ -30,6 +30,7 @@ alias edit="sudo nano ~/.bashrc"
 function u() { trizen -Syyu --noconfirm; trizen -Rsn $(trizen -Qdtq) --noconfirm; }
 function t() { trizen -S $1; }
 function tr() { trizen -Rsn $1; }
+function cache() {sudo pacman -Sc;}
 function usd() { u; off; }
 function offt() { backup; u; off; }
 function enable() { sudo systemctl enable $1.service; }
