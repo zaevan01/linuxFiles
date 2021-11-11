@@ -133,7 +133,7 @@ case $uCode in
 	[aA]|[aA][mM][dD]) 
 		pacman -S amd-ucode --noconfirm
 		;;
-	[iI]|[iI][nN][tT][EE][lL])
+	[iI]|[iI][nN][tT][eE][lL])
 		pacman -S intel-ucode --noconfirm
 		;;
 	*)
