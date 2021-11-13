@@ -32,6 +32,7 @@ function t() { trizen -S $1; }
 function tr() { trizen -Rsn $1; }
 function cache() { sudo pacman -Sc; }
 function usd() { u; off; }
+function uroff() { u; roff; }
 function offt() { backup; u; off; }
 function enable() { sudo systemctl enable $1.service; }
 
