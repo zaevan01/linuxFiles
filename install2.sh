@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Is system UEFI?"
+echo "Is system UEFI? [Y/n]"
 read uefi
 timedatectl list-timezones
 echo "Please enter a timezone:"
