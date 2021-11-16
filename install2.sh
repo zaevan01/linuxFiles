@@ -141,5 +141,4 @@ case $uCode in
 		echo
 		;;
 esac
-update-grub
 exit
