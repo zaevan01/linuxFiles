@@ -19,7 +19,7 @@ passwd
 case $uefi in
 	y|*)
 		#for uefi systems
-		pacman -S grub efibootmgr update-grub --noconfirm
+		pacman -S grub efibootmgr --noconfirm
 		mkdir /boot/efi
 		echo "Boot partition?"
 		read disk2
@@ -29,7 +29,7 @@ case $uefi in
 		;;
 	n)
 		#for non-uefi
-		pacman -S grub update-grub --noconfirm
+		pacman -S grub --noconfirm
 		grub-install /mnt
 		grub-mkconfig -o /boot/grub/grub.cfg
 		;;
