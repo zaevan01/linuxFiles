@@ -87,6 +87,7 @@ cd /home/$uName
 git clone https://aur.archlinux.org/trizen.git
 mv /etc/pacman.conf /etc/pacman.conf.bak
 cp /linuxFiles/pacman.conf /etc/pacman.conf
+pacman -Sy
 mv /home/$uName/.bashrc /home/$uName/.bashrc.bak
 cp /linuxFiles/.bashrc /home/$uName/.bashrc
 echo "Install Steam and additional software?(Y/n)"
