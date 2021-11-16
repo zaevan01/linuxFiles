@@ -93,7 +93,7 @@ echo "Install Steam and additional software?(Y/n)"
 read extraPrograms
 case $extraPrograms in
 	y|*)
-		pacman -S steam discord-canary minecraft-launcher lutris dxvk terminator libreoffice-fresh deluge vlc --noconfirm
+		pacman -S steam discord-canary minecraft-launcher lutris dxvk libreoffice-fresh deluge vlc --noconfirm
 		;;
 	n)
 		echo
