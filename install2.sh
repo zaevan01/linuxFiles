@@ -16,10 +16,11 @@ echo '127.0.0.1 localhost' >> /etc/hosts
 echo '::1 localhost' >> /etc/hosts
 echo '127.0.1.1 '$hName >> /etc/hosts
 passwd
+pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager --noconfirm
 case $uefi in
 	y|*)
 		#for uefi systems
-		pacman -S grub efibootmgr --noconfirm
+		pacman -S efibootmgr --noconfirm
 		mkdir /boot/efi
 		echo "Boot partition?"
 		read disk2
@@ -29,7 +30,6 @@ case $uefi in
 		;;
 	n)
 		#for non-uefi
-		pacman -S grub --noconfirm
 		grub-install /mnt
 		grub-mkconfig -o /boot/grub/grub.cfg
 		;;
@@ -38,10 +38,8 @@ echo "Please enter a username:"
 read uName
 useradd -m $uName
 passwd $uName
-pacman -S sudo --noconfirm
 export EDITOR=nano
 echo $uName' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-pacman -S xorg terminator base-devel reflector firefox --noconfirm
 echo "Please select a desktop environment:"
 echo -e "KDE (Plasma)\nGnome (3)\nXFCE\nCinnamon\nMate\n"
 echo "Please enter your selection:"
@@ -94,7 +92,7 @@ echo "Install Steam and additional software?(Y/n)"
 read extraPrograms
 case $extraPrograms in
 	y|*)
-		pacman -S steam discord-canary lutris dxvk-bin libreoffice-fresh deluge vlc --noconfirm
+		pacman -S steam discord-canary lutris libreoffice-fresh deluge vlc --noconfirm
 		;;
 	n)
 		echo
