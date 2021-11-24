@@ -94,14 +94,14 @@ echo "Install Steam and additional software?(Y/n)"
 read extraPrograms
 case $extraPrograms in
 	y|*)
-		pacman -S steam discord-canary minecraft-launcher lutris dxvk libreoffice-fresh deluge vlc --noconfirm
+		pacman -S steam discord-canary lutris dxvk-bin libreoffice-fresh deluge vlc --noconfirm
 		;;
 	n)
 		echo
 		;;
 esac
-echo "Please Select Appropriate Graphics Drivers"
-echo "Nvidia\nAmd\nIntel"
+echo -e "Please Select Appropriate Graphics Drivers\n"
+echo -e "Nvidia\nAmd\nIntel"
 read gDrivers
 case $gDrivers in
 	[nN]|[nN][vV][iI][dD][iI][aA])
@@ -128,7 +128,7 @@ case $xFile in
 		echo
 		;;
 esac
-echo "Install AMD or Intel uCode?\nAMD\nIntel" 
+echo -e "Install AMD or Intel uCode?\nAMD\nIntel" 
 read uCode
 case $uCode in
 	[aA]|[aA][mM][dD]) 
