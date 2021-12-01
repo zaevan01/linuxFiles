@@ -121,6 +121,7 @@ case $xFile in
 	[yY])
 		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
 		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
+		echo "options hid_apple fnmode=0" | tee -a /etc/modprobe.d/hid_apple.conf
 		;;
 	[nN]|*)
 		echo
