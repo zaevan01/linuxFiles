@@ -1,6 +1,19 @@
 #!/bin/bash
-echo "Is system UEFI? [Y/n]"
-read uefi
+
+input="/linuxFiles/parameters.txt"
+linenum=1
+while read line
+do
+	if [ $linenum == 1 ]
+	then
+	disk2=$line
+	elif [ $linenum == 2 ]
+	then
+	uefi=$line
+	fi
+	linenum=$((linenum + 1))
+done < "$input"
+
 timedatectl list-timezones
 echo "Please enter a timezone:"
 read zone
@@ -22,8 +35,6 @@ case $uefi in
 		#for uefi systems
 		pacman -S efibootmgr --noconfirm
 		mkdir /boot/efi
-		echo "Boot partition?"
-		read disk2
 		mount $disk2 /boot/efi
 		grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 		grub-mkconfig -o /boot/grub/grub.cfg
@@ -41,7 +52,7 @@ passwd $uName
 export EDITOR=nano
 echo $uName' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 echo "Please select a desktop environment:"
-echo -e "KDE (Plasma)\nGnome (3)\nXFCE\nCinnamon\nMate\n"
+echo -e "KDE (Plasma)\nGnome (3)\nXFCE\nCinnamon\nMate\nNone\n"
 echo "Please enter your selection:"
 dei=false
 while [ "$dei" = false ]
@@ -54,7 +65,7 @@ case $de in
 		dei=true
 		;;
 	[gG]|[gG][nN][oO][mM][eE])
-		pacman -S gnome --noconfirm
+		pacman -S gnome gnome-tweaks --noconfirm
 		systemctl enable gdm.service
 		dei=true
 		;;
@@ -71,6 +82,10 @@ case $de in
 	[mM]|[mM][aA][tT][eE])
 		pacman -S mate mate-extra lightdm lightdm-gtk-greeter --noconfirm
 		systemctl enable lightdm.service
+		dei=true
+		;;
+	[nN]|[nN][oO][nN][eE])
+		echo "No desktop environment installed";
 		dei=true
 		;;
 	*)
@@ -140,4 +155,5 @@ case $uCode in
 		echo
 		;;
 esac
-exit
+
+"All Done!"
