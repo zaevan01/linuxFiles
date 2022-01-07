@@ -29,7 +29,7 @@ echo '127.0.0.1 localhost' >> /etc/hosts
 echo '::1 localhost' >> /etc/hosts
 echo '127.0.1.1 '$hName >> /etc/hosts
 passwd
-pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager --noconfirm
+pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager ntfs-3g --noconfirm
 case $uefi in
 	y|*)
 		#for uefi systems
