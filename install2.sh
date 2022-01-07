@@ -22,14 +22,18 @@ echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
 locale-gen
 echo LANG=en_US.UTF-8 >> /etc/locale.conf
 export LANG=en_US.UTF-8
+
 echo "Hostname:"
 read hName
 echo $hName >> /etc/hostname
 echo '127.0.0.1 localhost' >> /etc/hosts
 echo '::1 localhost' >> /etc/hosts
 echo '127.0.1.1 '$hName >> /etc/hosts
+
 passwd
-pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager ntfs-3g --noconfirm
+
+pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager ntfs-3g cups system-config-printer print-manager --noconfirm
+
 case $uefi in
 	y|*)
 		#for uefi systems
@@ -45,13 +49,16 @@ case $uefi in
 		grub-mkconfig -o /boot/grub/grub.cfg
 		;;
 esac
+
 echo "Please enter a username:"
 read uName
 useradd -m $uName
 passwd $uName
+
 export EDITOR=nano
 echo $uName' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 usermod -aG wheel $uName
+
 echo "Please select a desktop environment:"
 echo -e "KDE (Plasma)\nGnome (3)\nXFCE\nCinnamon\nMate\nNone\n"
 echo "Please enter your selection:"
@@ -95,15 +102,20 @@ case $de in
 esac
 done
 systemctl enable NetworkManager.service
+systemctl enable cups.service
+
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 cd /home/$uName
 git clone https://aur.archlinux.org/trizen.git
+
 mv /etc/pacman.conf /etc/pacman.conf.bak
 cp /linuxFiles/pacman.conf /etc/pacman.conf
 pacman -Sy
+
 mv /home/$uName/.bashrc /home/$uName/.bashrc.bak
 cp /linuxFiles/.bashrc /home/$uName/.bashrc
+
 echo "Install Steam and additional software?(Y/n)"
 read extraPrograms
 case $extraPrograms in
@@ -114,6 +126,7 @@ case $extraPrograms in
 		echo
 		;;
 esac
+
 echo -e "Please Select Appropriate Graphics Drivers\n"
 echo -e "Nvidia\nAmd\nIntel"
 read gDrivers
@@ -131,6 +144,7 @@ case $gDrivers in
 	echo
 	;;
 esac
+
 echo "Is this Zac's Standard Desktop Setup?(y/N)"
 read xFile
 case $xFile in
@@ -143,6 +157,7 @@ case $xFile in
 		echo
 		;;
 esac
+
 echo -e "Install AMD or Intel uCode?\nAMD\nIntel" 
 read uCode
 case $uCode in
@@ -157,4 +172,4 @@ case $uCode in
 		;;
 esac
 
-"All Done!"
+echo "All Done!"
