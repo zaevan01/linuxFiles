@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+export EDITOR='nano'
+
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
@@ -35,6 +37,7 @@ function usd() { u; off; }
 function uroff() { u; roff; }
 function offt() { backup; u; off; }
 function enable() { sudo systemctl enable $1.service; }
+function start() { sudo systemctl start $1.service; }
 
 command1()
 {
