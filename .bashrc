@@ -39,6 +39,8 @@ function offt() { backup; u; off; }
 function enable() { sudo systemctl enable $1.service; }
 function start() { sudo systemctl start $1.service; }
 
+function gpush() { git add $1; git commit -m "Update"; git push origin master; }
+
 command1()
 {
 	if [ "$BASH_COMMAND" != command2 ]
