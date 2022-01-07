@@ -8,14 +8,22 @@ read uefi
 fdisk -l
 echo "Please select a boot device:"
 read bootDev
+echo "Is device an NVME drive? (y/N)"
+read nvme
 wipefs -a $bootDev
 #create filesystem
 case $uefi in
 	y|*)
 		#for uefi systems
 		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB 100%
-		boot=$bootDev"1"
-		root=$bootDev"2"
+		case $nvme in
+			n|*)
+				boot=$bootDev"1"
+				root=$bootDev"2"
+			y)
+				boot=$bootDev"p1"
+				root=$bootDev"p2"
+		esac
 		mkfs.fat -F 32 $boot
 		mkfs.ext4 $root
 		mount $root /mnt
@@ -23,7 +31,12 @@ case $uefi in
 	n)
 		#for non-uefi
 		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 100%
-		root=$bootDev"1"
+		case $nvme in
+			n|*)
+				root=$bootDev"1"
+			y)
+				root=$bootDev"p1"
+		esac
 		mkfs.ext4 $root
 		mount $root /mnt
 		;;
@@ -34,6 +47,8 @@ pacstrap /mnt base linux linux-firmware linux-headers linux-zen linux-zen-header
 genfstab -U /mnt >> /mnt/etc/fstab
 cd /mnt/
 git clone https://github.com/zaevan01/linuxFiles.git
+touch parameters.txt
+echo $boot >> /mnt/linuxFiles/parameters.txt
+echo $uefi >> /mnt/linuxFiles/parameters.txt
 cd
 arch-chroot /mnt
-#shutdown now
