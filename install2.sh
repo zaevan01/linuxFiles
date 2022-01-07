@@ -51,6 +51,7 @@ useradd -m $uName
 passwd $uName
 export EDITOR=nano
 echo $uName' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+usermod -aG wheel $uName
 echo "Please select a desktop environment:"
 echo -e "KDE (Plasma)\nGnome (3)\nXFCE\nCinnamon\nMate\nNone\n"
 echo "Please enter your selection:"
