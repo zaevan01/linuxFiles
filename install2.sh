@@ -32,7 +32,7 @@ echo '127.0.1.1 '$hName >> /etc/hosts
 
 passwd
 
-pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager ntfs-3g cups system-config-printer print-manager --noconfirm
+pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager ntfs-3g cups system-config-printer print-manager openssh pulseaudio-bluetooth --noconfirm
 
 case $uefi in
 	y|*)
@@ -101,8 +101,10 @@ case $de in
 		;;
 esac
 done
+
 systemctl enable NetworkManager.service
 systemctl enable cups.service
+systemctl enable bluetooth.service
 
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
