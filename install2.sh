@@ -175,3 +175,4 @@ case $uCode in
 esac
 
 echo "All Done!"
+exit
