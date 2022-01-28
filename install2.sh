@@ -186,3 +186,4 @@ case $laptop in
 esac
 
 echo "All Done!"
+exit
