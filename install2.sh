@@ -174,4 +174,15 @@ case $uCode in
 		;;
 esac
 
+echo -e "Is this a laptop?\n[y/N]"
+read laptop
+case $laptop in
+	[yY])
+		pacman -S tlp --noconfirm
+		;;
+	[nN]|*)
+		echo
+		;;
+esac
+
 echo "All Done!"
