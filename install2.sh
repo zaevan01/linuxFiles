@@ -32,7 +32,7 @@ echo '127.0.1.1 '$hName >> /etc/hosts
 
 passwd
 
-pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager ntfs-3g cups system-config-printer print-manager openssh pulseaudio-bluetooth --noconfirm
+pacman -S grub sudo xorg mkinitcpio-firmware terminator base-devel reflector firefox networkmanager ntfs-3g cups system-config-printer print-manager openssh pulseaudio-bluetooth --noconfirm
 
 case $uefi in
 	y|*)
