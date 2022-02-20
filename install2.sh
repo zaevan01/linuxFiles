@@ -39,17 +39,17 @@ pacman -Sy
 pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager ntfs-3g cups system-config-printer print-manager openssh pulseaudio-bluetooth --noconfirm
 
 case $uefi in
+	n)
+		#for non-uefi
+		grub-install /mnt
+		grub-mkconfig -o /boot/grub/grub.cfg
+		;;
 	y|*)
 		#for uefi systems
 		pacman -S efibootmgr --noconfirm
 		mkdir /boot/efi
 		mount $disk2 /boot/efi
 		grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
-		grub-mkconfig -o /boot/grub/grub.cfg
-		;;
-	n)
-		#for non-uefi
-		grub-install /mnt
 		grub-mkconfig -o /boot/grub/grub.cfg
 		;;
 esac
@@ -115,8 +115,6 @@ reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 cd /home/$uName
 git clone https://aur.archlinux.org/trizen.git
 
-pacman -Sy
-
 mv /home/$uName/.bashrc /home/$uName/.bashrc.bak
 cp /linuxFiles/.bashrc /home/$uName/.bashrc
 
@@ -127,6 +125,30 @@ case $extraPrograms in
 		pacman -S steam discord-canary lutris libreoffice-fresh deluge vlc --noconfirm
 		;;
 	n)
+		echo
+		;;
+esac
+
+echo "Is this Zac's Standard Desktop Setup?(y/N)"
+read xFile
+case $xFile in
+	[yY])
+		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
+		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
+		echo "options hid_apple fnmode=0" | tee -a /etc/modprobe.d/hid_apple.conf
+		;;
+	[nN]|*)
+		echo
+		;;
+esac
+
+echo -e "Is this a laptop?\n[y/N]"
+read laptop
+case $laptop in
+	[yY])
+		pacman -S tlp touche touchegg --noconfirm
+		;;
+	[nN]|*)
 		echo
 		;;
 esac
@@ -149,19 +171,6 @@ case $gDrivers in
 	;;
 esac
 
-echo "Is this Zac's Standard Desktop Setup?(y/N)"
-read xFile
-case $xFile in
-	[yY])
-		mv /etc/x11/xorg.conf /etc/x11/xorg.conf.bak
-		cp /linuxFiles/xorg.conf.bak /etc/x11/xorg.conf
-		echo "options hid_apple fnmode=0" | tee -a /etc/modprobe.d/hid_apple.conf
-		;;
-	[nN]|*)
-		echo
-		;;
-esac
-
 echo -e "Install AMD or Intel uCode?\nAMD\nIntel" 
 read uCode
 case $uCode in
@@ -172,17 +181,6 @@ case $uCode in
 		pacman -S intel-ucode --noconfirm
 		;;
 	*)
-		echo
-		;;
-esac
-
-echo -e "Is this a laptop?\n[y/N]"
-read laptop
-case $laptop in
-	[yY])
-		pacman -S tlp touche touchegg --noconfirm
-		;;
-	[nN]|*)
 		echo
 		;;
 esac
