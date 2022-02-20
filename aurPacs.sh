@@ -1,3 +1,3 @@
 trizen -Syyu
 
-trizen -S mkinitcpio-firmware touchegg touche
+trizen -S mkinitcpio-firmware timeshift touchegg touche
