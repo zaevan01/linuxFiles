@@ -34,6 +34,7 @@ passwd
 
 mv /etc/pacman.conf /etc/pacman.conf.bak
 cp /linuxFiles/pacman.conf /etc/pacman.conf
+pacman -Sy
 
 pacman -S grub sudo xorg terminator base-devel reflector firefox networkmanager ntfs-3g cups system-config-printer print-manager openssh pulseaudio-bluetooth --noconfirm
 
