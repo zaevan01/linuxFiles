@@ -178,7 +178,7 @@ echo -e "Is this a laptop?\n[y/N]"
 read laptop
 case $laptop in
 	[yY])
-		pacman -S tlp --noconfirm
+		pacman -S tlp touche touchegg --noconfirm
 		;;
 	[nN]|*)
 		echo
