@@ -40,22 +40,3 @@ function enable() { sudo systemctl enable $1.service; }
 function start() { sudo systemctl start $1.service; }
 
 function gpush() { git add $1; git commit -m "Update"; git push origin master; }
-
-command1()
-{
-	if [ "$BASH_COMMAND" != command2 ]
-	then
-		command_flag=1
-	fi
-	return 0
-}
-trap command1 debug
-command2()
-{
-	if [ ! "$command_flag" ]
-	then
-		loginctl lock-session
-	fi
-	command_flag=
-}
-PROMPT_COMMAND=command2
