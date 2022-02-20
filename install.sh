@@ -3,7 +3,7 @@
 #Note for connecting to wifi: iwctl --passphrase {WIFIPASSWORD} station {DEVICE(usually wlan0)} connect "{SSID}"
 #
 ls /sys/firmware/efi/efivars
-echo "Is system UEFI? (Y/n)"
+echo "Is system UEFI? (y/n)"
 read uefi
 fdisk -l
 echo "Please select a boot device:"
@@ -13,16 +13,18 @@ read nvme
 wipefs -a $bootDev
 #create filesystem
 case $uefi in
-	y|*)
+	y)
 		#for uefi systems
 		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 512MB \ mkpart primary 512MB 100%
 		case $nvme in
-			n|*)
-				boot=$bootDev"1"
-				root=$bootDev"2"
 			y)
 				boot=$bootDev"p1"
 				root=$bootDev"p2"
+;;
+			n|*)
+				boot=$bootDev"1"
+				root=$bootDev"2"
+;;
 		esac
 		mkfs.fat -F 32 $boot
 		mkfs.ext4 $root
@@ -32,10 +34,12 @@ case $uefi in
 		#for non-uefi
 		parted --script $bootDev \ mklabel gpt \ mkpart primary 2048s 100%
 		case $nvme in
-			n|*)
-				root=$bootDev"1"
 			y)
 				root=$bootDev"p1"
+;;
+			n|*)
+				root=$bootDev"1"
+;;
 		esac
 		mkfs.ext4 $root
 		mount $root /mnt
