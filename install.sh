@@ -20,11 +20,11 @@ case $uefi in
 			y)
 				boot=$bootDev"p1"
 				root=$bootDev"p2"
-;;
+				;;
 			n|*)
 				boot=$bootDev"1"
 				root=$bootDev"2"
-;;
+				;;
 		esac
 		mkfs.fat -F 32 $boot
 		mkfs.ext4 $root
@@ -36,10 +36,10 @@ case $uefi in
 		case $nvme in
 			y)
 				root=$bootDev"p1"
-;;
+				;;
 			n|*)
 				root=$bootDev"1"
-;;
+				;;
 		esac
 		mkfs.ext4 $root
 		mount $root /mnt
