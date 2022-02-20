@@ -32,6 +32,9 @@ echo '127.0.1.1 '$hName >> /etc/hosts
 
 passwd
 
+mv /etc/pacman.conf /etc/pacman.conf.bak
+cp /linuxFiles/pacman.conf /etc/pacman.conf
+
 pacman -S grub sudo xorg mkinitcpio-firmware terminator base-devel reflector firefox networkmanager ntfs-3g cups system-config-printer print-manager openssh pulseaudio-bluetooth --noconfirm
 
 case $uefi in
@@ -111,8 +114,6 @@ reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 cd /home/$uName
 git clone https://aur.archlinux.org/trizen.git
 
-mv /etc/pacman.conf /etc/pacman.conf.bak
-cp /linuxFiles/pacman.conf /etc/pacman.conf
 pacman -Sy
 
 mv /home/$uName/.bashrc /home/$uName/.bashrc.bak
