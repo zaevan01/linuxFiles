@@ -147,6 +147,7 @@ read laptop
 case $laptop in
 	[yY])
 		pacman -S tlp --noconfirm
+		systemctl enable tlp.service
 		;;
 	[nN]|*)
 		echo
