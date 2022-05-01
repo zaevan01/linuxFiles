@@ -29,9 +29,9 @@ alias sword="ssh -p 4450 192.168.1.51 -l pi"
 alias stick="ssh -p 22 192.168.1.60 -l root"
 alias edit="sudo nano ~/.bashrc"
 
-function u() { trizen -Syyu --noconfirm; trizen -Rsn $(trizen -Qdtq) --noconfirm; }
-function t() { trizen -S $1; }
-function tr() { trizen -Rsn $1; }
+function u() { yay -Syyu --noconfirm; yay -Rsn $(yay -Qdtq) --noconfirm; }
+function y() { yay -S $1; }
+function yr() { yay -Rsn $1; }
 function cache() { sudo pacman -Sc; }
 function usd() { u; off; }
 function uroff() { u; roff; }
