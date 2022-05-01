@@ -113,7 +113,7 @@ systemctl enable bluetooth.service
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "US" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 cd /home/$uName
-git clone https://aur.archlinux.org/trizen.git
+git clone https://aur.archlinux.org/yay.git
 
 mv /home/$uName/.bashrc /home/$uName/.bashrc.bak
 cp /linuxFiles/.bashrc /home/$uName/.bashrc
