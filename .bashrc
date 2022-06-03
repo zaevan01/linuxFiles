@@ -34,7 +34,7 @@ function y() { yay -S $1; }
 function yr() { yay -Rsn $1; }
 function cache() { sudo pacman -Sc; }
 function usd() { u; off; }
-function uroff() { u; roff; }
+function urb() { u; roff; }
 function offt() { backup; u; off; }
 function enable() { sudo systemctl enable $1.service; }
 function start() { sudo systemctl start $1.service; }
