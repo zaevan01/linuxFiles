@@ -10,8 +10,8 @@ export EDITOR='nano'
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-alias off="sudo systemctl poweroff"
-alias roff="sudo systemctl reboot"
+alias sd="sudo systemctl poweroff"
+alias rb="sudo systemctl reboot"
 alias backup="sudo timeshift --create"
 alias sleep="sudo systemctl suspend"
 alias wisdom="fortune | cowsay -f tux | lolcat"
