@@ -72,8 +72,8 @@ do
 read de
 case $de in
 	[kK]|[kK][dD][eE])
-		pacman -S plasma plasma-wayland-session kde-applications --noconfirm
-		systemctl enable sddm.service
+		pacman -S plasma kde-applications --noconfirm
+		systemctl enable sddm
 		dei=true
 		;;
 	[gG]|[gG][nN][oO][mM][eE])
