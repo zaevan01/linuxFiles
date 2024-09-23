@@ -78,22 +78,22 @@ case $de in
 		;;
 	[gG]|[gG][nN][oO][mM][eE])
 		pacman -S gnome gnome-tweaks --noconfirm
-		systemctl enable gdm.service
+		systemctl enable gdm
 		dei=true
 		;;
 	[xX]|[xX][fF][cC][eE])
 		pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm
-		systemctl enable lightdm.service
+		systemctl enable lightdm
 		dei=true
 		;;
 	[cC]|[cC][iI][nN][nN][aA][mM][oO][nN])
 		pacman -S cinnamon lightdm lightdm-gtk-greeter --noconfirm
-		systemctl enable lightdm.service
+		systemctl enable lightdm
 		dei=true
 		;;
 	[mM]|[mM][aA][tT][eE])
 		pacman -S mate mate-extra lightdm lightdm-gtk-greeter --noconfirm
-		systemctl enable lightdm.service
+		systemctl enable lightdm
 		dei=true
 		;;
 	[nN]|[nN][oO][nN][eE])
