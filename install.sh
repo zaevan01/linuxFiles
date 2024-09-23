@@ -27,7 +27,7 @@ case $uefi in
 				;;
 		esac
 		mkfs.fat -F 32 $boot
-		mkfs.ext4 $root
+		mkfs.btrfs $root
 		mount $root /mnt
 		;;
 	n)
@@ -41,7 +41,7 @@ case $uefi in
 				root=$bootDev"1"
 				;;
 		esac
-		mkfs.ext4 $root
+		mkfs.btrfs $root
 		mount $root /mnt
 		;;
 esac
