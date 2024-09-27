@@ -33,9 +33,9 @@ function u() { yay -Syyu --noconfirm; yay -Rsn $(yay -Qdtq) --noconfirm; }
 function y() { yay -S $1; }
 function yr() { yay -Rsn $1; }
 function cache() { sudo pacman -Sc; }
-function usd() { u; off; }
-function urb() { u; roff; }
-function offt() { backup; u; off; }
+function usd() { u; sd; }
+function urb() { u; rb; }
+function offt() { backup; u; sd; }
 function enable() { sudo systemctl enable $1.service; }
 function start() { sudo systemctl start $1.service; }
 
